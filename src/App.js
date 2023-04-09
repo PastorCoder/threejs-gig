@@ -1,25 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import styled from "styled-components";
+import "./styles.css";
 
-function App() {
+import Background from "./components/Background";
+import TextSection from "./components/TextSection";
+import Box from "./components/Box"
+
+import { Canvas } from "@react-three/fiber";
+import { OrbitControls  } from "@react-three/drei";
+
+export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Wrapper className="App">
+      <Background />
+      <TextSection />
+      <Canvas>
+        <OrbitControls enableZoom={false} /> {/**Adds light and colour to the box */}
+        <Box className="canvas" />
+        <ambientLight intensity={0.5} />{" "} {/**Adds light and colour to the box */}
+        <directionalLight position={[-2, 5, 2]} intensity={1} />{" "}{/**Adds light and colour to the edge of the box */}
+      </Canvas>
+    </Wrapper>
   );
 }
 
-export default App;
+const Wrapper = styled.div`
+  position: relative;
+  background: #1f1144;
+
+  canvas {
+    height: 500px;
+    
+  }
+`;
